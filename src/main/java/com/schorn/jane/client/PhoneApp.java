@@ -36,7 +36,6 @@ import org.schorn.ella.ui.layout.Style;
 import org.schorn.ella.ui.util.ToString;
 import org.schorn.ella.ui.visual.AspectStyle;
 import org.schorn.ella.ui.visual.FontStyle;
-import org.schorn.ella.ui.visual.FrameStyle;
 import org.schorn.ella.ui.visual.GenericStyle;
 import org.schorn.ella.ui.visual.PageStyle;
 import org.schorn.ella.ui.visual.PanelStyle;
@@ -92,24 +91,21 @@ public class PhoneApp {
 
         try {
             ControlWidgets.Menu mMain = ControlWidgets.Menu.create(Item.Name.create("main").toString());
-            ControlWidgets.MenuItem miHome = ControlWidgets.MenuItem.create(Item.Name.create("home").toString());
-            miHome.setAnchor(new URL("http://www.google.com"));
-            miHome.setImage(new URL("file:///D:/Users/bschorn/documents/GitHub/inter-ui/src/main/resources/images/home.svg"));
-            mMain.addItem(miHome);
-            ControlWidgets.MenuItem miHelp = ControlWidgets.MenuItem.create(Item.Name.create("help").toString());
-            miHome.setAnchor(new URL("http://www.google.com"));
-            miHome.setImage(new URL("file:///D:/Users/bschorn/documents/GitHub/inter-ui/src/main/resources/images/help.svg"));
-            mMain.addItem(miHelp);
-            ControlWidgets.MenuItem miProfile = ControlWidgets.MenuItem.create(Item.Name.create("profile").toString());
-            miHome.setAnchor(new URL("http://www.google.com"));
-            miHome.setImage(new URL("file:///D:/Users/bschorn/documents/GitHub/inter-ui/src/main/resources/images/profile.svg"));
-            mMain.addItem(miProfile);
-
+            mMain.addItem("home", null)
+                    .setAnchor(new URL("http://www.google.com"))
+                    .setImage(new URL("file:///D:/Users/bschorn/documents/GitHub/inter-ui/src/main/resources/images/home.svg"));
+            mMain.addItem("help", null)
+                    .setAnchor(new URL("http://www.google.com"))
+                    .setImage(new URL("file:///D:/Users/bschorn/documents/GitHub/inter-ui/src/main/resources/images/help.svg"));
+            mMain.addItem("profile", null)
+                    .setAnchor(new URL("http://www.google.com"))
+                    .setImage(new URL("file:///D:/Users/bschorn/documents/GitHub/inter-ui/src/main/resources/images/profile.svg"));
             this.footer.accept(mMain);
 
-            this.style.add(JaneStyle.MENU, CSS.Selector.createClass(mMain.customTag()));
-            this.style.add(JaneStyle.MENU_ITEM, CSS.Selector.createClass(miHome.customTag()));
-            this.style.add(JaneStyle.MENU_ITEM_IMG, CSS.Selector.create(String.format("li.%s img", miHome.customTag())));
+            this.style.add(JaneStyle.MENU, ControlWidgets.Menu.Selector.MENU);
+            this.style.add(JaneStyle.MENU_ITEM, ControlWidgets.Menu.Selector.MENU_ITEM);
+            this.style.add(JaneStyle.MENU_ITEM_IMG, ControlWidgets.Menu.Selector.ANCHOR_IMAGE);
+            this.style.add(GenericStyle.IMG_OBJECT_FIT_CONTAIN, ControlWidgets.Menu.Selector.ANCHOR_IMAGE);
 
         } catch (Exception ex) {
             LGR.error("{}.ctor() - Caught Exception: {}",
@@ -117,11 +113,9 @@ public class PhoneApp {
                     ToString.stackTrace(ex));
         }
 
-        CSS.Selector x = CSS.Selector.createClass(this.footer.name());
-        this.style.add(JaneStyle.FOOTER, CSS.Selector.createClass(this.footer.name()));
-        this.style.add(JaneStyle.HEADER, CSS.Selector.createClass(this.header.name()));
-        this.style.add(JaneStyle.MAIN, CSS.Selector.createClass(this.content.name()));
-
+        this.style.add(JaneStyle.HEADER, CSS.Selector.create(String.format("div.%s", this.header.name())));
+        this.style.add(JaneStyle.MAIN, CSS.Selector.create(String.format("div.%s", this.content.name())));
+        this.style.add(JaneStyle.FOOTER, CSS.Selector.create(String.format("div.%s", this.footer.name())));
     }
 
     public String build() throws Exception {
@@ -150,7 +144,7 @@ public class PhoneApp {
             this.add(GenericStyle.BOX_SIZING_BORDER_BOX, Page.Selector.GLOBAL);
             this.add(GenericStyle.ALIGN_CENTER_JUSTIFY_CENTER, Page.Selector.GLOBAL);
             this.add(PageStyle.FLEX_COLUMN_CONTAINER);
-            this.add(FrameStyle.DEFAULT_CONTAINER);
+            //   this.add(FrameStyle.DEFAULT_CONTAINER);
             this.add(PanelStyle.DEFAULT_CONTAINER);
             this.add(PanelStyle.DEFAULT_LABEL);
             this.add(AspectStyle.DEFAULT_CONTAINER);

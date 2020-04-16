@@ -24,6 +24,7 @@
 package com.schorn.jane.client.style;
 
 import org.schorn.ella.ui.html.CSS;
+import org.schorn.ella.ui.html.CSSProperty;
 import org.schorn.ella.ui.layout.Style;
 
 /**
@@ -45,37 +46,42 @@ public enum JaneStyle implements Style.Factory {
 
     static public void init() {
         Style.Repo.set(HEADER, CSS.Block.create()
-                .append(CSS.Rule.create(CSS.Property.height, "30px"))
-                .append(CSS.Rule.create(CSS.Property.border, "1px solid rgba(0,0,0, 0.5)"))
-                .append(CSS.Rule.create(CSS.Property.background_image, "linear-gradient(180deg, #fff, #ddd, 40%, #ccc)"))
-                .append(CSS.Rule.create(CSS.Property.padding, "5px"))
+                .append(CSS.Rule.create(CSS.Property.height, "40px"))
+                .append(CSS.Rule.create(CSS.Property.border, "1px solid rgba(0,0,0, 0.4)"))
+                //.append(CSS.Rule.create(CSS.Property.background_image, "linear-gradient(180deg, #fff, #ddd, 40%, #ccc)"))
+                .append(CSS.Rule.create(CSS.Property.background_color, "rgba(225,225,225,0.5)"))
+                .append(CSS.Rule.create(CSS.Property.padding, "2px"))
         );
-        Style.Repo.set(HEADER, CSS.Block.create()
-                .append(CSS.Rule.create(CSS.Property.height, "30px"))
-                .append(CSS.Rule.create(CSS.Property.border, "1px solid rgba(0,0,0, 0.5)"))
-                .append(CSS.Rule.create(CSS.Property.background_image, "linear-gradient(180deg, #fff, #ddd, 40%, #ccc)"))
-                .append(CSS.Rule.create(CSS.Property.padding, "5px"))
+        Style.Repo.set(FOOTER, CSS.Block.create()
+                .append(CSS.Rule.create(CSS.Property.height, "40px"))
+                .append(CSS.Rule.create(CSS.Property.border, "1px solid rgba(0,0,0, 0.4)"))
+                //.append(CSS.Rule.create(CSS.Property.background_image, "linear-gradient(180deg, #fff, #ddd, 40%, #ccc)"))
+                .append(CSS.Rule.create(CSS.Property.background_color, "white"))
+                .append(CSS.Rule.create(CSS.Property.padding, "2px"))
         );
         Style.Repo.set(MAIN, CSS.Block.create()
                 //.append(CSS.Selector.createClass("main"))
-                .append(CSS.Rule.create(CSS.Property.flex_grow, "1"))
+                .append(CSS.Rule.create(CSSProperty.flex_grow.unit(1)))
                 //.append(CSS.Rule.create(CSS.Property.background_color, "white"))
                 .append(CSS.Rule.create(CSS.Property.padding, "5px"))
         );
         Style.Repo.set(MENU, CSS.Block.create()
                 //.append(CSS.Selector.createClass("menu"))
-                .append(CSS.Rule.create(CSS.Property.display, "flex"))
-                .append(CSS.Rule.create(CSS.Property.flex_direction, "row"))
-                .append(CSS.Rule.create(CSS.Property.justify_content, "space-between"))
-                .append(CSS.Rule.create(CSS.Property.align_items, "center"))
+                .append(CSS.Rule.create(CSSProperty.display.flex))
+                .append(CSS.Rule.create(CSSProperty.flex_direction.row))
+                .append(CSS.Rule.create(CSSProperty.flex_wrap.wrap))
+                .append(CSS.Rule.create(CSSProperty.justify_content.space_between))
+                .append(CSS.Rule.create(CSSProperty.align_items.center))
         );
         Style.Repo.set(MENU_ITEM, CSS.Block.create()
                 //.append(CSS.Selector.createClass("menu-item"))
-                .append(CSS.Rule.create(CSS.Property.padding, "5px"))
+                .append(CSS.Rule.create(CSS.Property.padding, "0px"))
+                .append(CSS.Rule.create(CSS.Property.width, "45px"))
+                .append(CSS.Rule.create(CSS.Property.height, "45px"))
         );
         Style.Repo.set(MENU_ITEM_IMG, CSS.Block.create()
                 //.append(CSS.Selector.createClass("menu-item-img"))
-                .append(CSS.Rule.create(CSS.Property.width, "16px"))
+                .append(CSS.Rule.create(CSS.Property.width, "32px"))
         );
     }
     /*
