@@ -53,6 +53,12 @@ public class PhoneApp {
     static private final Logger LGR = LoggerFactory.getLogger(PhoneApp.class);
 
     private static final String OUTFILE = String.format("D:/Users/bschorn/output/%s.html", PhoneApp.class.getSimpleName());
+    private final URL urlHomeImage;
+    private final URL urlHelpImage;
+    private final URL urlProfileImage;
+    private final URL urlHome;
+    private final URL urlHelp;
+    private final URL urlProfile;
 
     private final Style style;
     private final Page page;
@@ -62,11 +68,24 @@ public class PhoneApp {
 
     public PhoneApp(Style style) {
         this.style = style;
+        URL urlHomeImage0 = null;
+        URL urlHelpImage0 = null;
+        URL urlProfileImage0 = null;
+        URL urlHome0 = null;
+        URL urlHelp0 = null;
+        URL urlProfile0 = null;
         Page page0 = null;
         Frame header0 = null;
         Frame content0 = null;
         Frame footer0 = null;
         try {
+            urlHomeImage0 = new URL("file:///D:/Users/bschorn/documents/GitHub/inter-ui/src/main/resources/images/home.svg");
+            urlHelpImage0 = new URL("file:///D:/Users/bschorn/documents/GitHub/inter-ui/src/main/resources/images/help.svg");
+            urlProfileImage0 = new URL("file:///D:/Users/bschorn/documents/GitHub/inter-ui/src/main/resources/images/profile.svg");
+            urlHome0 = new URL("http://www.google.com");
+            urlHelp0 = new URL("http://www.google.com");
+            urlProfile0 = new URL("http://www.google.com");
+
             page0 = Page.create();
             page0.setTitle(this.getClass().getSimpleName());
             page0.setViewport("device-width", "1");
@@ -84,6 +103,12 @@ public class PhoneApp {
                     this.getClass().getSimpleName(),
                     ToString.stackTrace(ex));
         }
+        this.urlHomeImage = urlHomeImage0;
+        this.urlHelpImage = urlHelpImage0;
+        this.urlProfileImage = urlProfileImage0;
+        this.urlHome = urlHome0;
+        this.urlHelp = urlHelp0;
+        this.urlProfile = urlProfile0;
         this.page = page0;
         this.header = header0;
         this.content = content0;
@@ -91,15 +116,9 @@ public class PhoneApp {
 
         try {
             ControlWidgets.Menu mMain = ControlWidgets.Menu.create(Item.Name.create("main").toString());
-            mMain.addItem("home", null)
-                    .setAnchor(new URL("http://www.google.com"))
-                    .setImage(new URL("file:///D:/Users/bschorn/documents/GitHub/inter-ui/src/main/resources/images/home.svg"));
-            mMain.addItem("help", null)
-                    .setAnchor(new URL("http://www.google.com"))
-                    .setImage(new URL("file:///D:/Users/bschorn/documents/GitHub/inter-ui/src/main/resources/images/help.svg"));
-            mMain.addItem("profile", null)
-                    .setAnchor(new URL("http://www.google.com"))
-                    .setImage(new URL("file:///D:/Users/bschorn/documents/GitHub/inter-ui/src/main/resources/images/profile.svg"));
+            mMain.addItem("home", null).setAnchor(this.urlHome).setImage(this.urlHomeImage);
+            mMain.addItem("help", null).setAnchor(this.urlHelp).setImage(this.urlHelpImage);
+            mMain.addItem("profile", null).setAnchor(this.urlProfile).setImage(this.urlProfileImage);
             this.footer.accept(mMain);
 
             this.style.add(JaneStyle.MENU, ControlWidgets.Menu.Selector.MENU);
