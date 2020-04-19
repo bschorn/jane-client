@@ -27,7 +27,6 @@ import com.schorn.jane.client.style.JaneStyle;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import org.schorn.ella.ui.html.CSS;
 import org.schorn.ella.ui.layout.Aspect;
 import org.schorn.ella.ui.layout.Frame;
 import org.schorn.ella.ui.layout.Item;
@@ -36,6 +35,7 @@ import org.schorn.ella.ui.layout.Style;
 import org.schorn.ella.ui.util.ToString;
 import org.schorn.ella.ui.visual.AspectStyle;
 import org.schorn.ella.ui.visual.FontStyle;
+import org.schorn.ella.ui.visual.FrameStyle;
 import org.schorn.ella.ui.visual.GenericStyle;
 import org.schorn.ella.ui.visual.PageStyle;
 import org.schorn.ella.ui.visual.PanelStyle;
@@ -71,9 +71,9 @@ public class PhoneApp {
             page0.setTitle(this.getClass().getSimpleName());
             page0.setViewport("device-width", "1");
 
-            header0 = Frame.create(Item.Name.create("header"));
-            content0 = Frame.create(Item.Name.create("content"));
-            footer0 = Frame.create(Item.Name.create("footer"));
+            header0 = Frame.create(Item.Name.create("breadcrumb"), Frame.Intent.HEADER);
+            content0 = Frame.create(Item.Name.create("featured"), Frame.Intent.CONTENT);
+            footer0 = Frame.create(Item.Name.create("quicklink"), Frame.Intent.FOOTER);
 
             page0.accept(header0);
             page0.accept(content0);
@@ -113,9 +113,9 @@ public class PhoneApp {
                     ToString.stackTrace(ex));
         }
 
-        this.style.add(JaneStyle.HEADER, CSS.Selector.create(String.format("div.%s", this.header.name())));
-        this.style.add(JaneStyle.MAIN, CSS.Selector.create(String.format("div.%s", this.content.name())));
-        this.style.add(JaneStyle.FOOTER, CSS.Selector.create(String.format("div.%s", this.footer.name())));
+        this.style.add(JaneStyle.HEADER, Frame.Selectors.HEADER.selector());
+        //this.style.add(JaneStyle.MAIN, Frame.Selectors.CONTENT.selector());
+        this.style.add(JaneStyle.FOOTER, Frame.Selectors.FOOTER.selector());
     }
 
     public String build() throws Exception {
@@ -139,20 +139,21 @@ public class PhoneApp {
         public PhoneStyle() {
             Visual.init();
             JaneStyle.init();
-            this.reset();
-            this.add(FontStyle.ARIAL85, Page.Selector.CONTAINER);
+            this.add(FontStyle.CALIBRI, Page.Selector.CONTAINER);
             this.add(GenericStyle.BOX_SIZING_BORDER_BOX, Page.Selector.GLOBAL);
             this.add(GenericStyle.ALIGN_CENTER_JUSTIFY_CENTER, Page.Selector.GLOBAL);
-            this.add(PageStyle.FLEX_COLUMN_CONTAINER);
-            //   this.add(FrameStyle.DEFAULT_CONTAINER);
-            this.add(PanelStyle.DEFAULT_CONTAINER);
+            //this.add(PageStyle.FLEX_COLUMN_CONTAINER);
+            this.add(PageStyle.BLUE_STEEL);
+            this.add(FrameStyle.BLUE_STEEL);
+            //this.add(PanelStyle.DEFAULT_CONTAINER);
             this.add(PanelStyle.DEFAULT_LABEL);
+            this.add(PanelStyle.BLUE_STEEL);
             this.add(AspectStyle.DEFAULT_CONTAINER);
             this.add(AspectStyle.DEFAULT_LABEL);
             this.add(GenericStyle.GRID_FULL_SOLID_BLACK_ON_TGREY, Aspect.Selector.CONTAINER);
             this.add(GenericStyle.TEXT_ALIGN_CENTER_PADDING_2PX, Aspect.Selector.LABEL);
             this.add(GenericStyle.BORDER_2PX, Aspect.Selector.CONTAINER);
-            this.add(WidgetStyle.DEFAULT_CONTAINER);
+            this.add(WidgetStyle.BLUE_STEEL);
             this.add(WidgetStyle.DEFAULT_LABEL);
             this.add(WidgetStyle.DEFAULT_INPUT);
             this.add(WidgetStyle.LABEL_OVER_INPUT);

@@ -53,7 +53,7 @@ public enum JaneStyle implements Style.Factory {
                 .append(CSS.Rule.create(CSS.Property.padding, "2px"))
         );
         Style.Repo.set(FOOTER, CSS.Block.create()
-                .append(CSS.Rule.create(CSS.Property.height, "40px"))
+                //.append(CSS.Rule.create(CSS.Property.height, "40px"))
                 .append(CSS.Rule.create(CSS.Property.border, "1px solid rgba(0,0,0, 0.4)"))
                 //.append(CSS.Rule.create(CSS.Property.background_image, "linear-gradient(180deg, #fff, #ddd, 40%, #ccc)"))
                 .append(CSS.Rule.create(CSS.Property.background_color, "white"))
@@ -76,12 +76,13 @@ public enum JaneStyle implements Style.Factory {
         Style.Repo.set(MENU_ITEM, CSS.Block.create()
                 //.append(CSS.Selector.createClass("menu-item"))
                 .append(CSS.Rule.create(CSS.Property.padding, "0px"))
-                .append(CSS.Rule.create(CSS.Property.width, "45px"))
-                .append(CSS.Rule.create(CSS.Property.height, "45px"))
+        //.append(CSS.Rule.create(CSS.Property.width, "45px"))
+        //.append(CSS.Rule.create(CSS.Property.height, "45px"))
         );
         Style.Repo.set(MENU_ITEM_IMG, CSS.Block.create()
                 //.append(CSS.Selector.createClass("menu-item-img"))
                 .append(CSS.Rule.create(CSS.Property.width, "32px"))
+                .append(CSS.Rule.create(CSS.Property.height, "32px"))
         );
     }
     /*
