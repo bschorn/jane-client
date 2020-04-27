@@ -32,6 +32,7 @@ import org.schorn.ella.ui.layout.Style;
  * @author bschorn
  */
 public enum JaneStyle implements Style.Factory {
+    PAGE,
     HEADER,
     FOOTER,
     MAIN,
@@ -45,6 +46,10 @@ public enum JaneStyle implements Style.Factory {
     }
 
     static public void init() {
+        Style.Repo.set(PAGE, CSS.Block.create()
+                .append(CSS.Rule.create(CSSProperty.display.grid))
+                .append(CSS.Rule.create(CSS.Property.grid_template_rows, "fit-content(40px) 1fr fit-content(40px)"))
+        );
         Style.Repo.set(HEADER, CSS.Block.create()
                 .append(CSS.Rule.create(CSS.Property.height, "40px"))
                 .append(CSS.Rule.create(CSS.Property.border, "1px solid rgba(0,0,0, 0.4)"))
@@ -85,34 +90,5 @@ public enum JaneStyle implements Style.Factory {
                 .append(CSS.Rule.create(CSS.Property.height, "32px"))
         );
     }
-    /*
-.header,
-.footer {
-  height: 30px;
-  border: 1px solid rgba(0, 0, 0, 0.5);
-  background-image: linear-gradient(180deg, #fff, #ddd 40%, #ccc);
-  padding: 5px;
-}
-
-.main {
-  flex-grow: 1;
-  background-color: tan;
-  padding: 5px;
-}
-
-ul.menu {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-}
-.menu-item {
-  border: 1px solid white;
-  padding: 5px;
-}
-.fit-picture {
-    width: 16px;
-}
-     */
 
 }
