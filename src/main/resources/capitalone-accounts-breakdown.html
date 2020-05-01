@@ -1,0 +1,93 @@
+
+
+<div id="page-content">
+Logo
+	<div class="global-navigation-container__main">
+		<div class="ui-view-container" role="main">
+			<div ui-view ng-animate-children class>
+				<div class="helloContainer">
+Good Evening
+				</div>
+				<div data-ng-include="summary.accountsUrl" class="container accounts modules fadeIn" ...>
+FORM				<form id="summaryAccountsForm" class="ng-pristine ng-valid>
+						<div class="accounts-container" id="summaryParent">
+FIRST ACCOUNT
+							<div id="account-CV/t/8s1BOHAgYxUwYGbcK6Vx8zWcFlRpHjebfOjSwk=" class="account" data-ng-repeat="element in summary.accountSummaryData" ng-class="{ 'account-disable': summary.isButtonClicked }" data-ng-click="summary.goToDetail($event, element, $index)" data-ng-hide="summary.hideAccount[$index] != undefined &amp;&amp; summary.hideAccount[$index] == true" role="presentation" tabindex="-1" aria-hidden="false">
+								<account-message obj="element" idx="$index" selected="summary.selected" nbr-of-account="summary.accountSummaryData.length">
+									<div class="atddAccountType acct module tileBackground info" ng-class="getStateMessageClass()" ng-style="{'background-image': element.accountStatus == constant.C_Off ? constant.C_Off_bg_circle: 'url('+element.bground+')', 'background-color': element.accountStatus == constant.C_Off ? constant.C_Off_bg_color : '', 'min-height': element.experience >= 'A' ? '200px' : '180px'}" style="background-image: url(&quot;https://ecm.capitalone.com/EASE/assets/images/BANK/L1/bg_360_sml.jpg&quot;); min-height: 180px;">
+										<div class="tile__spinner-container" ng-class="loading">
+CONTENT PORTION OF ACCOUNT BUTTON
+											<div ng-transclude="">
+												<!-- ngInclude: summary.getSummaryTemplate(element,$index) -->
+												<div data-ng-include="summary.getSummaryTemplate(element,$index)" class="actTilePadding pointer" ng-class="{pointer: summary.getPointer(element)}">
+													<div class="cf _lob_DDA360">
+														<!-- ngIf: element.showQuickAction($index) && element.experience >= 'B' -->
+														<div class="bal" tabindex="0" role="link" aria-label="Lizzie account tile. Your available balance is $4,551.85. Double click to enter the account details page.">
+															<p class="title">
+																<brand-image element-val="element" page="AccountSummary">
+ACCOUNT NAME														<h2 ng-class="{headerTruncateLarge:true,'headerTruncateSmall':false}" class="headerTruncateLarge">Lizzie</h2>
+																</brand-image>
+ACCOUNT TRAIL													<span class="accnumbertrail">...4838</span>
+															</p>
+															<!-- ngIf: element.showPrimaryData -->
+															<div class="amount" data-ng-if="element.showPrimaryData" checkamountdigits="">
+																<localized-currency amount="element.amount" sign-class="sign" symbol-class="symbol" suf-symbol-class="suf" amount-dollars-class="dollar" amount-cents-class="cents">
+SCREEN READER														<span class="screen-reader-only">$4,551.85</span>
+																	<div aria-hidden="true">
+SIGN																	<span ng-class="{&quot;sign&quot;: true, million: million}" class="sign"></span>
+CCY																		<span ng-class="{&quot;symbol&quot;: true, &quot;&quot;: true, million: million}" class="symbol">$</span>
+DOLLAR																	<span ng-class="{&quot;dollar&quot;: true, million: million}" class="dollar">4,551</span>
+																		<!-- ngIf: showDecimalSep -->
+CENTS																	<span ng-class="{&quot;cents&quot;: true, million: million}" class="cents">85</span>
+SUF																		<span ng-class="{&quot;symbol&quot;: true, &quot;suf&quot;: true, million: million}" class="symbol suf"></span>
+																	</div>
+																</localized-currency>
+															</div>
+															<!-- end ngIf: element.showPrimaryData -->
+															<!-- ngIf: element.showPrimaryData -->
+AVAILABLE BALANCE											<p class="label left" data-ng-if="element.showPrimaryData">AVAILABLE BALANCE</p><!-- end ngIf: element.showPrimaryData -->
+															<!-- ngIf: element.showActionButton && element.actionButton && element.actionButton.textAboveButton -->
+														</div>
+ACTION ELEMENT											<div class="action" data-ng-show="element.showActionButton &amp;&amp; element.actionButton &amp;&amp; (element.actionButton.textAboveButton || element.actionButton.buttonText)" aria-hidden="false" style="">
+															<p title="" class="mobileActionHide label">
+																<!-- ngIf: element.actionButton.textAboveButton -->
+															</p>
+ACTION BUTTON CONTAINER										<div data-ng-show="element.actionButton.buttonText" class="btn-container" aria-hidden="false" style="">
+ACTION BUTTON													<button id="summary-action-button-CV/t/8s1BOHAgYxUwYGbcK6Vx8zWcFlRpHjebfOjSwk=" data-ng-class="{ 'account-disable': summary.isButtonClicked }" class="atddAccountSummaryTileButton" tabindex="0" aria-label="View Account" data-ng-click="summary.actionButton($event, element, $index)" focus-on-modal-close="" return-to-page-event="returningToParentPage">
+																	<div data-ng-class="summary.loadingButton[$index]">
+ACTION LABEL															<span>View Account</span>
+																	</div>
+																</button>
+															</div>
+														</div>
+														<!-- ngIf: summary.showSecondaryData || summary.reward.display() -->
+													</div>
+												</div>
+											</div>
+FOOTER OF ACCOUNT BUTTON (alerts go here)									
+											<div id="accountMudFlap_CV/t/8s1BOHAgYxUwYGbcK6Vx8zWcFlRpHjebfOjSwk=" class="product-alert ng-hide" ng-hide="isHideStateMessage(element)" role="presentation" aria-hidden="true" style="">
+												<div class="alert-message">
+													<div class="content" aria-label="">
+														<!-- ngIf: showAlertIcon() -->
+														<!-- ngIf: showCustomIcon() && !showAlertIcon() -->
+														<div>
+															<p class="alertMessage" ng-hide="messageObj.msgLink.value" ng-bind-html="messageObj.message"></p>
+															<p id="mudFlapMessage_CV/t/8s1BOHAgYxUwYGbcK6Vx8zWcFlRpHjebfOjSwk=" ng-hide="!messageObj.msgLink.value" aria-hidden="true" class="ng-hide" style="">
+																<!-- ngIf: messageObj.msgLink.value -->
+															</p>
+														</div>
+														<div ng-show="showCloseIcon(messageObj)" aria-hidden="true" class="ng-hide" style="">
+															<button tabindex="0" class="alert-close" aria-label="Dismiss message" ng-click="dismissMessage($event)">
+																<img src="ease-ui/dist/images/close-white.png" alt="mudflap-dismiss">
+															</button>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</account-message>
+							</div>						
+						</div>
+NEXT ACCOUNT
+					</form>

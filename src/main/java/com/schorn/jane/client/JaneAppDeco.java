@@ -29,11 +29,8 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import org.schorn.ella.ui.app.AppSection;
-import org.schorn.ella.ui.app.PhoneApp;
+import org.schorn.ella.ui.app.ScreenComponent;
 import org.schorn.ella.ui.layout.Frame;
 import org.schorn.ella.ui.layout.Identifier;
 import org.schorn.ella.ui.layout.Page;
@@ -52,16 +49,17 @@ import org.schorn.ella.ui.visual.WindowStyle;
 import org.schorn.ella.ui.widget.ControlWidgets;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.schorn.ella.ui.app.PhoneAppDeco;
 
 /**
  *
  * @author bschorn
  */
-public class JaneApp implements PhoneApp {
+public class JaneAppDeco implements PhoneAppDeco {
 
-    static private final Logger LGR = LoggerFactory.getLogger(JaneApp.class);
+    static private final Logger LGR = LoggerFactory.getLogger(JaneAppDeco.class);
 
-    private static final String OUTFILE = String.format("D:/Users/bschorn/output/%s.html", JaneApp.class.getSimpleName());
+    private static final String OUTFILE = String.format("D:/Users/bschorn/output/%s.html", JaneAppDeco.class.getSimpleName());
     private final URL urlHomeImage;
     private final URL urlHelpImage;
     private final URL urlProfileImage;
@@ -76,9 +74,9 @@ public class JaneApp implements PhoneApp {
     private final Window mainPanel;
     private final Frame footerFrame;
 
-    private final List<AppSection> sections = new ArrayList<>();
+    private final List<ScreenComponent> sections = new ArrayList<>();
 
-    public JaneApp(Style style) {
+    public JaneAppDeco(Style style) {
         this.style = style;
         URL urlHomeImage0 = null;
         URL urlHelpImage0 = null;
@@ -138,11 +136,12 @@ public class JaneApp implements PhoneApp {
             mMain.addItem(ControlWidgets.MenuItem.create(Identifier.create("profile"), null).setAnchor(this.urlProfile).setImage(this.urlProfileImage));
             this.footerFrame.accept(mMain);
 
+            /*
             this.style.add(JaneStyle.MENU, ControlWidgets.Menu.Selector.MENU);
             this.style.add(JaneStyle.MENU_ITEM, ControlWidgets.MenuItem.Selector.MENU_ITEM);
             this.style.add(JaneStyle.MENU_ITEM_IMG, ControlWidgets.MenuItem.Selector.ANCHOR_IMAGE);
             this.style.add(GenericStyle.IMG_OBJECT_FIT_CONTAIN, ControlWidgets.MenuItem.Selector.ANCHOR_IMAGE);
-
+            */
 
         } catch (Exception ex) {
             LGR.error("{}.ctor() - Caught Exception: {}",
@@ -150,9 +149,6 @@ public class JaneApp implements PhoneApp {
                     ToString.stackTrace(ex));
         }
 
-        this.style.add(JaneStyle.HEADER, Frame.Selectors.HEADER.selector());
-        this.style.add(JaneStyle.MAIN, Frame.Selectors.CONTENT.selector());
-        this.style.add(JaneStyle.FOOTER, Frame.Selectors.FOOTER.selector());
     }
 
     @Override
@@ -178,7 +174,7 @@ public class JaneApp implements PhoneApp {
     }
 
     @Override
-    public void accept(AppSection appSection) {
+    public void accept(ScreenComponent appSection) {
         this.sections.add(appSection);
     }
 
@@ -193,7 +189,7 @@ public class JaneApp implements PhoneApp {
             this.add(GenericStyle.ALIGN_CENTER_JUSTIFY_CENTER, Page.Selector.GLOBAL);
             //this.add(PageStyle.FLEX_COLUMN_CONTAINER);
             this.add(PageStyle.BLUE_STEEL);
-            this.add(JaneStyle.PAGE, Page.Selector.GLOBAL);
+            //this.add(JaneStyle.PAGE, Page.Selector.CONTAINER);
             this.add(FrameStyle.BLUE_STEEL);
             //this.add(PanelStyle.DEFAULT_CONTAINER);
             this.add(WindowStyle.DEFAULT_LABEL);
@@ -215,16 +211,20 @@ public class JaneApp implements PhoneApp {
             this.add(AccountsStyle.ACCOUNT_VALUE, Accounts.Selector.ACCOUNT_VALUE);
             this.add(AccountsStyle.ACCOUNT_VALUE_SPAN_SUBSCRIPT, Accounts.Selector.ACCOUNT_VALUE_SPAN_SUBSCRIPT);
             this.add(AccountsStyle.ACCOUNT_VALUE_LABEL, Accounts.Selector.ACCOUNT_VALUE_LABEL);
-            //this.add(WidgetStyle.LABEL_LEFT_INPUT);
+            this.add(JaneStyle.MENU, ControlWidgets.Menu.Selector.MENU);
+            this.add(JaneStyle.MENU_ITEM, ControlWidgets.MenuItem.Selector.MENU_ITEM);
+            this.add(JaneStyle.MENU_ITEM_IMG, ControlWidgets.MenuItem.Selector.ANCHOR_IMAGE);
+            this.add(GenericStyle.IMG_OBJECT_FIT_CONTAIN, ControlWidgets.MenuItem.Selector.ANCHOR_IMAGE);
+            this.add(JaneStyle.HEADER, Frame.Selector.HEADER);
+            this.add(JaneStyle.MAIN, Frame.Selector.CONTENT);
+            this.add(JaneStyle.FOOTER, Frame.Selector.FOOTER);
         }
 
     }
     static public void main(String[] args) {
-        JaneApp janeApp = new JaneApp(new AppStyle());
+        JaneAppDeco janeApp = new JaneAppDeco(new AppStyle());
         try {
-            Accounts accounts = new Accounts(true);
-            testAccounts().forEach(accounts);
-            janeApp.accept(accounts);
+            janeApp.accept(new Accounts(true));
             janeApp.accept(new Account(false));
             Files.write(Paths.get(OUTFILE), janeApp.build().getBytes());
         } catch (Exception ex) {
@@ -232,23 +232,4 @@ public class JaneApp implements PhoneApp {
         }
     }
 
-    static List<Map<String, String>> testAccounts() {
-        List<Map<String, String>> list = new ArrayList<>();
-        Map<String, String> details1 = new HashMap<>();
-        details1.put("account_proxy", "X1001");
-        details1.put("account_name", "Jane Checking");
-        details1.put("account_id_hint", "...6874");
-        details1.put("account_ccy", "$");
-        details1.put("account_amount", "3,492.78");
-        list.add(details1);
-        Map<String, String> details2 = new HashMap<>();
-        details2.put("account_proxy", "B2006");
-        details2.put("account_name", "Jane Savings");
-        details2.put("account_id_hint", "...4509");
-        details2.put("account_ccy", "$");
-        details2.put("account_amount", "12,456.91");
-        list.add(details2);
-
-        return list;
-    }
 }
