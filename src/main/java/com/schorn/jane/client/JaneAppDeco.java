@@ -30,7 +30,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import org.schorn.ella.ui.app.ScreenComponent;
+import org.schorn.ella.ui.app.ViewComponent;
 import org.schorn.ella.ui.layout.Frame;
 import org.schorn.ella.ui.layout.Identifier;
 import org.schorn.ella.ui.layout.Page;
@@ -74,7 +74,7 @@ public class JaneAppDeco implements PhoneAppDeco {
     private final Window mainPanel;
     private final Frame footerFrame;
 
-    private final List<ScreenComponent> sections = new ArrayList<>();
+    private final List<ViewComponent> sections = new ArrayList<>();
 
     public JaneAppDeco(Style style) {
         this.style = style;
@@ -174,7 +174,7 @@ public class JaneAppDeco implements PhoneAppDeco {
     }
 
     @Override
-    public void accept(ScreenComponent appSection) {
+    public void accept(ViewComponent appSection) {
         this.sections.add(appSection);
     }
 

@@ -8,7 +8,7 @@ package com.schorn.jane.client;
 import java.util.Arrays;
 import org.schorn.ella.ui.app.App;
 import org.schorn.ella.ui.app.BankApp;
-import org.schorn.ella.ui.app.ScreenComponent;
+import org.schorn.ella.ui.app.ViewComponent;
 
 /**
  *
@@ -17,17 +17,16 @@ import org.schorn.ella.ui.app.ScreenComponent;
 public class JaneBank extends BankApp<JaneMonitor> {
 
 
-    static public JaneBank create(App.Bootstrap bootstrap) {
+    static public JaneBank create(App.Bootstrap bootstrap) throws Exception {
         return new JaneBank(bootstrap);
     }
 
-    private JaneBank(Bootstrap bootstrap) {
+    private JaneBank(Bootstrap bootstrap) throws Exception {
         super(bootstrap);
-        Arrays.asList(
-                new ScreenComponent[]{
-                    new JaneHeader(this),
-                    new JaneContent(this),
-                    new JaneFooter(this)})
+        Arrays.asList(new ViewComponent[]{
+            new JaneHeader(this),
+            new JaneContent(this),
+            new JaneFooter(this)})
                 .stream()
                 .forEachOrdered(this.screen());
 

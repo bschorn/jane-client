@@ -11,6 +11,17 @@ import org.schorn.ella.ui.app.App;
  *
  * @author bschorn
  */
-public class JaneData implements App.Data {
+public class JaneController implements App.Controller {
+
+    private final App app;
+
+    public JaneController(App app) {
+        this.app = app;
+    }
+
+    @Override
+    public App getApp() {
+        return this.app;
+    }
 
 }

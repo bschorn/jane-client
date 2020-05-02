@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
-import org.schorn.ella.ui.app.ScreenComponent;
+import org.schorn.ella.ui.app.ViewComponent;
 import org.schorn.ella.ui.html.CSS;
 import org.schorn.ella.ui.html.HTML;
 import org.schorn.ella.ui.layout.Style;
@@ -21,7 +21,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author bschorn
  */
-public class Accounts extends ScreenComponent implements Consumer<Map<String, String>> {
+public class Accounts extends ViewComponent implements Consumer<Map<String, String>> {
 
     static final Logger LGR = LoggerFactory.getLogger(Accounts.class);
     static private final String IMG_URL = "http://ecm.capitalone.com/EASE/assets/images/BANK/L1/bg_360_sml.jpg";

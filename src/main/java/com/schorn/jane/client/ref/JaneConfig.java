@@ -5,6 +5,10 @@
  */
 package com.schorn.jane.client.ref;
 
+import com.schorn.jane.client.JaneContent;
+import com.schorn.jane.client.JaneFooter;
+import com.schorn.jane.client.JaneHeader;
+import java.util.Properties;
 import org.schorn.ella.ui.app.App;
 import org.schorn.ella.ui.layout.Item;
 
@@ -14,14 +18,48 @@ import org.schorn.ella.ui.layout.Item;
  */
 public class JaneConfig implements App.Config {
 
+    private final App app;
+    private final Properties properties;
+
+    public JaneConfig(App app) {
+        this.app = app;
+        this.properties = this.app.bootstrap().getProperties();
+    }
+
     @Override
     public <T> T getProperty(Class<T> classT, String name) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String value = this.properties.getProperty(name);
+        if (value != null) {
+            if (classT.equals(String.class)) {
+                return (T) value;
+            }
+            if (classT.equals(Boolean.class)) {
+                return (T) Boolean.valueOf(value);
+            }
+            if (classT.equals(Integer.class)) {
+                return (T) Integer.valueOf(value);
+            }
+            if (classT.equals(Double.class)) {
+                return (T) Double.valueOf(value);
+            }
+        }
+        return null;
     }
 
     @Override
     public <T> T getItemPropertyValue(Class<T> classT, Class<?> classFor, Item.Property property) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.getProperty(classT, String.format("%s.%s", classFor.getSimpleName(), property.getName()));
+    }
+
+    @Override
+    public App getApp() {
+        return this.app;
+    }
+
+    static public void main(String[] args) {
+        JaneHeader.main(new String[0]);
+        JaneContent.main(new String[0]);
+        JaneFooter.main(new String[0]);
     }
 
 }

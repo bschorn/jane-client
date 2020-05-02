@@ -5,14 +5,14 @@
  */
 package com.schorn.jane.client;
 
-import org.schorn.ella.ui.app.ScreenComponent;
+import org.schorn.ella.ui.app.ViewComponent;
 import org.schorn.ella.ui.html.HTML;
 
 /**
  *
  * @author bschorn
  */
-public class Account extends ScreenComponent {
+public class Account extends ViewComponent {
 
     public Account(boolean visible) {
         super("101", "account", "Account", visible);
