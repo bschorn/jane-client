@@ -3,26 +3,38 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.schorn.jane.client.ref;
+package com.schorn.jane.client.app;
 
+import com.schorn.jane.client.view.JaneContent;
+import com.schorn.jane.client.view.JaneFooter;
+import com.schorn.jane.client.view.JaneHeader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import org.schorn.ella.ui.EllamentProvider;
 import org.schorn.ella.ui.app.App;
-import org.schorn.ella.ui.app.ViewComponent;
+import org.schorn.ella.ui.layout.Page;
 
 /**
  *
  * @author bschorn
  */
-public class JaneView implements App.View {
+public class JaneViewer implements App.AppViewer {
 
     private final App app;
-    private final List<Component> components = new ArrayList<>();
+    private final List<App.AppViewer.Component> components = new ArrayList<>();
+    private final Page page;
+    private final String stageId;
 
-    public JaneView(App app) {
+    public JaneViewer(App app) {
         this.app = app;
+        this.components.add(new JaneHeader(app.config()));
+        JaneContent content = new JaneContent(app.config());
+        this.stageId = content.id();
+        this.components.add(content);
+        this.components.add(new JaneFooter(app.config()));
+        this.page = EllamentProvider.provider().createPage();
     }
 
     @Override
@@ -49,13 +61,22 @@ public class JaneView implements App.View {
     }
 
     @Override
-    public void accept(ViewComponent screenComponent) {
-        this.components.add(screenComponent);
-    }
-
-    @Override
     public App getApp() {
         return this.app;
     }
 
+    /*
+    public String display() {
+        return this.page.produce();
+    }
+     */
+    @Override
+    public Stage stage() {
+        return this.component(Stage.class, this.stageId);
+    }
+
+    @Override
+    public Page page() {
+        return this.page;
+    }
 }

@@ -25,31 +25,32 @@ package com.schorn.jane.client;
 
 import com.schorn.jane.client.style.AccountsStyle;
 import com.schorn.jane.client.style.JaneStyle;
+import com.schorn.jane.client.view.scene.Accounts;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import org.schorn.ella.ui.app.ViewComponent;
+import org.schorn.ella.ui.app.PhoneAppDeco;
+import org.schorn.ella.ui.app.ViewerComponent;
 import org.schorn.ella.ui.layout.Frame;
 import org.schorn.ella.ui.layout.Identifier;
 import org.schorn.ella.ui.layout.Page;
 import org.schorn.ella.ui.layout.Pane;
 import org.schorn.ella.ui.layout.Style;
 import org.schorn.ella.ui.layout.Window;
+import org.schorn.ella.ui.style.FontStyle;
+import org.schorn.ella.ui.style.FrameStyle;
+import org.schorn.ella.ui.style.GenericStyle;
+import org.schorn.ella.ui.style.PageStyle;
+import org.schorn.ella.ui.style.PaneStyle;
+import org.schorn.ella.ui.style.Visual;
+import org.schorn.ella.ui.style.WidgetStyle;
+import org.schorn.ella.ui.style.WindowStyle;
 import org.schorn.ella.ui.util.ToString;
-import org.schorn.ella.ui.visual.FontStyle;
-import org.schorn.ella.ui.visual.FrameStyle;
-import org.schorn.ella.ui.visual.GenericStyle;
-import org.schorn.ella.ui.visual.PageStyle;
-import org.schorn.ella.ui.visual.PaneStyle;
-import org.schorn.ella.ui.visual.Visual;
-import org.schorn.ella.ui.visual.WidgetStyle;
-import org.schorn.ella.ui.visual.WindowStyle;
 import org.schorn.ella.ui.widget.ControlWidgets;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.schorn.ella.ui.app.PhoneAppDeco;
 
 /**
  *
@@ -74,7 +75,7 @@ public class JaneAppDeco implements PhoneAppDeco {
     private final Window mainPanel;
     private final Frame footerFrame;
 
-    private final List<ViewComponent> sections = new ArrayList<>();
+    private final List<ViewerComponent> sections = new ArrayList<>();
 
     public JaneAppDeco(Style style) {
         this.style = style;
@@ -101,9 +102,9 @@ public class JaneAppDeco implements PhoneAppDeco {
             page0.setTitle(this.getClass().getSimpleName());
             page0.setViewport("device-width", "1");
 
-            headerFrame0 = Frame.createHeader(Identifier.NONE);
-            contentFrame0 = Frame.createContent(Identifier.NONE);
-            footerFrame0 = Frame.createFooter(Identifier.NONE);
+            headerFrame0 = Frame.create(Identifier.NONE, Frame.Intent.HEADER);
+            contentFrame0 = Frame.create(Identifier.NONE, Frame.Intent.CONTENT);
+            footerFrame0 = Frame.create(Identifier.NONE, Frame.Intent.FOOTER);
 
             mainPanel0 = Window.create(Identifier.create("janeapp"));
 
@@ -174,7 +175,7 @@ public class JaneAppDeco implements PhoneAppDeco {
     }
 
     @Override
-    public void accept(ViewComponent appSection) {
+    public void accept(ViewerComponent appSection) {
         this.sections.add(appSection);
     }
 
@@ -224,8 +225,8 @@ public class JaneAppDeco implements PhoneAppDeco {
     static public void main(String[] args) {
         JaneAppDeco janeApp = new JaneAppDeco(new AppStyle());
         try {
-            janeApp.accept(new Accounts(true));
-            janeApp.accept(new Account(false));
+            //janeApp.accept(new Accounts(true));
+            //janeApp.accept(new Account(false));
             Files.write(Paths.get(OUTFILE), janeApp.build().getBytes());
         } catch (Exception ex) {
             ex.printStackTrace();

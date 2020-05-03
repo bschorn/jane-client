@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.schorn.jane.client.ref;
+package com.schorn.jane.client.app;
 
-import com.schorn.jane.client.JaneContent;
-import com.schorn.jane.client.JaneFooter;
-import com.schorn.jane.client.JaneHeader;
+import com.schorn.jane.client.view.JaneContent;
+import com.schorn.jane.client.view.JaneFooter;
+import com.schorn.jane.client.view.JaneHeader;
 import java.util.Properties;
 import org.schorn.ella.ui.app.App;
 import org.schorn.ella.ui.layout.Item;
@@ -16,7 +16,7 @@ import org.schorn.ella.ui.layout.Item;
  *
  * @author bschorn
  */
-public class JaneConfig implements App.Config {
+public class JaneConfig implements App.AppConfig {
 
     private final App app;
     private final Properties properties;

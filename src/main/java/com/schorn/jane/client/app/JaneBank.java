@@ -3,12 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.schorn.jane.client;
+package com.schorn.jane.client.app;
 
-import java.util.Arrays;
+import com.schorn.jane.client.view.JaneBootstrap;
 import org.schorn.ella.ui.app.App;
 import org.schorn.ella.ui.app.BankApp;
-import org.schorn.ella.ui.app.ViewComponent;
 
 /**
  *
@@ -16,20 +15,12 @@ import org.schorn.ella.ui.app.ViewComponent;
  */
 public class JaneBank extends BankApp<JaneMonitor> {
 
-
     static public JaneBank create(App.Bootstrap bootstrap) throws Exception {
         return new JaneBank(bootstrap);
     }
 
     private JaneBank(Bootstrap bootstrap) throws Exception {
         super(bootstrap);
-        Arrays.asList(new ViewComponent[]{
-            new JaneHeader(this),
-            new JaneContent(this),
-            new JaneFooter(this)})
-                .stream()
-                .forEachOrdered(this.screen());
-
     }
 
     static public void main(String[] args) {

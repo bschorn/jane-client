@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.schorn.jane.client;
+package com.schorn.jane.client.view;
 
 import java.lang.reflect.Constructor;
 import java.net.URL;
@@ -11,6 +11,10 @@ import java.net.URLConnection;
 import java.util.Properties;
 import org.schorn.ella.ui.ClassLocator;
 import org.schorn.ella.ui.app.App;
+import org.schorn.ella.ui.app.App.AppConfig;
+import org.schorn.ella.ui.app.App.AppController;
+import org.schorn.ella.ui.app.App.AppStyler;
+import org.schorn.ella.ui.app.App.AppViewer;
 import org.schorn.ella.ui.util.CommandLineArgs;
 import org.schorn.ella.ui.util.ToString;
 
@@ -61,24 +65,30 @@ public class JaneBootstrap implements App.Bootstrap {
     }
 
     @Override
-    public App.Config getConfig(App app) throws Exception {
-        Class<?> implClass = this.classLocator.getImplClass(App.Config.class);
+    public AppConfig getConfig(App app) throws Exception {
+        Class<?> implClass = this.classLocator.getImplClass(AppConfig.class);
         Constructor constructor = implClass.getDeclaredConstructor(App.class);
-        return (App.Config) constructor.newInstance(app);
+        return (AppConfig) constructor.newInstance(app);
     }
 
     @Override
-    public App.Controller getController(App app) throws Exception {
-        Class<?> implClass = this.classLocator.getImplClass(App.Controller.class);
+    public AppController getController(App app) throws Exception {
+        Class<?> implClass = this.classLocator.getImplClass(AppController.class);
         Constructor constructor = implClass.getDeclaredConstructor(App.class);
-        return (App.Controller) constructor.newInstance(app);
+        return (AppController) constructor.newInstance(app);
     }
 
     @Override
-    public App.View getView(App app) throws Exception {
-        Class<?> implClass = this.classLocator.getImplClass(App.View.class);
+    public AppViewer getViewer(App app) throws Exception {
+        Class<?> implClass = this.classLocator.getImplClass(AppViewer.class);
         Constructor constructor = implClass.getDeclaredConstructor(App.class);
-        return (App.View) constructor.newInstance(app);
+        return (AppViewer) constructor.newInstance(app);
     }
 
+    @Override
+    public AppStyler getStyler(App app) throws Exception {
+        Class<?> implClass = this.classLocator.getImplClass(AppStyler.class);
+        Constructor constructor = implClass.getDeclaredConstructor(App.class);
+        return (AppStyler) constructor.newInstance(app);
+    }
 }

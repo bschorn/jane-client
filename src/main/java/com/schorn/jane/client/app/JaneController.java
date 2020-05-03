@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.schorn.jane.client.ref;
+package com.schorn.jane.client.app;
 
 import org.schorn.ella.ui.app.App;
 
@@ -11,7 +11,7 @@ import org.schorn.ella.ui.app.App;
  *
  * @author bschorn
  */
-public class JaneController implements App.Controller {
+public class JaneController implements App.AppController {
 
     private final App app;
 

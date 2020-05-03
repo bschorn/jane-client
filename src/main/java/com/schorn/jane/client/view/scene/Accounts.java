@@ -3,16 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.schorn.jane.client;
+package com.schorn.jane.client.view.scene;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
-import org.schorn.ella.ui.app.ViewComponent;
+import org.schorn.ella.ui.app.App.AppConfig;
+import org.schorn.ella.ui.app.ViewerScene;
 import org.schorn.ella.ui.html.CSS;
 import org.schorn.ella.ui.html.HTML;
+import org.schorn.ella.ui.layout.Item;
 import org.schorn.ella.ui.layout.Style;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +23,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author bschorn
  */
-public class Accounts extends ViewComponent implements Consumer<Map<String, String>> {
+public class Accounts extends ViewerScene implements Consumer<Map<String, String>> {
 
     static final Logger LGR = LoggerFactory.getLogger(Accounts.class);
     static private final String IMG_URL = "http://ecm.capitalone.com/EASE/assets/images/BANK/L1/bg_360_sml.jpg";
@@ -35,8 +37,12 @@ public class Accounts extends ViewComponent implements Consumer<Map<String, Stri
 
     private final List<Map<String, String>> accounts = new ArrayList<>();
 
-    public Accounts(boolean visible) {
-        super("100", "accounts", "Accounts", visible);
+    public Accounts(AppConfig appConfig) {
+        super(appConfig.getItemPropertyValue(String.class, Accounts.class, Item.Properties.ID),
+                appConfig.getItemPropertyValue(String.class, Accounts.class, Item.Properties.NAME),
+                appConfig.getItemPropertyValue(String.class, Accounts.class, Item.Properties.LABEL),
+                appConfig.getItemPropertyValue(Boolean.class, Accounts.class, Item.Properties.VISIBLE)
+        );
     }
 
     @Override
