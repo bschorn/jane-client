@@ -135,7 +135,7 @@ public class JaneAppDeco implements PhoneAppDeco {
             mMain.addItem(ControlWidgets.MenuItem.create(Identifier.create("home"), null).setAnchor(this.urlHome).setImage(this.urlHomeImage));
             mMain.addItem(ControlWidgets.MenuItem.create(Identifier.create("help"), null).setAnchor(this.urlHelp).setImage(this.urlHelpImage));
             mMain.addItem(ControlWidgets.MenuItem.create(Identifier.create("profile"), null).setAnchor(this.urlProfile).setImage(this.urlProfileImage));
-            this.footerFrame.accept(mMain);
+            //this.footerFrame.accept(mMain);
 
             /*
             this.style.add(JaneStyle.MENU, ControlWidgets.Menu.Selector.MENU);

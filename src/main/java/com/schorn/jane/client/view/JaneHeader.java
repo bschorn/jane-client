@@ -7,8 +7,10 @@ package com.schorn.jane.client.view;
 
 import org.schorn.ella.ui.app.App.AppConfig;
 import org.schorn.ella.ui.app.ViewerComponent;
-import org.schorn.ella.ui.html.HTML;
+import org.schorn.ella.ui.layout.Frame;
+import org.schorn.ella.ui.layout.Identifier;
 import org.schorn.ella.ui.layout.Item;
+import org.schorn.ella.ui.layout.Window;
 
 /**
  *
@@ -16,25 +18,35 @@ import org.schorn.ella.ui.layout.Item;
  */
 public class JaneHeader extends ViewerComponent {
 
-    public JaneHeader(AppConfig appConfig) {
+    private final Frame frame;
+    private final Window window;
+
+    public JaneHeader(AppConfig appConfig) throws Exception {
         super(appConfig.getItemPropertyValue(String.class, JaneHeader.class, Item.Properties.ID),
                 appConfig.getItemPropertyValue(String.class, JaneHeader.class, Item.Properties.NAME),
                 appConfig.getItemPropertyValue(String.class, JaneHeader.class, Item.Properties.LABEL),
                 appConfig.getItemPropertyValue(Boolean.class, JaneHeader.class, Item.Properties.VISIBLE)
         );
+        this.frame = Frame.create(Identifier.NONE, Frame.Intent.HEADER);
+        this.window = Window.create(Identifier.create(this.name()), this.label());
+        this.frame.accept(this.window);
     }
 
     @Override
-    protected void build0(HTML.Element element) throws Exception {
-
+    public Frame frame() {
+        return this.frame;
     }
 
+    /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
     private JaneHeader() {
         super("jane-header", "header", "Header", Boolean.TRUE);
+        this.frame = null;
+        this.window = null;
     }
 
     static public void main(String[] args) {
         JaneHeader item = new JaneHeader();
         System.out.println(item.dumpProperties());
     }
+
 }

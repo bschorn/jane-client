@@ -5,6 +5,7 @@
  */
 package com.schorn.jane.client.view;
 
+import java.io.InputStream;
 import java.lang.reflect.Constructor;
 import java.net.URL;
 import java.net.URLConnection;
@@ -43,7 +44,9 @@ public class JaneBootstrap implements App.Bootstrap {
         try {
             URL urlObject = getClass().getClassLoader().getResource("bootstrap.properties").toURI().toURL();
             URLConnection urlConnection = urlObject.openConnection();
-            this.properties.load(urlConnection.getInputStream());
+            try (InputStream inputStream = urlConnection.getInputStream()) {
+                this.properties.load(inputStream);
+            }
         } catch (Exception ex) {
             System.err.println(ToString.stackTrace(ex));
         }

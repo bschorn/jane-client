@@ -5,7 +5,9 @@
  */
 package com.schorn.jane.client.view.scene;
 
+import com.schorn.jane.client.widget.AccountPanel;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,9 +15,10 @@ import java.util.function.Consumer;
 import org.schorn.ella.ui.app.App.AppConfig;
 import org.schorn.ella.ui.app.ViewerScene;
 import org.schorn.ella.ui.html.CSS;
-import org.schorn.ella.ui.html.HTML;
+import org.schorn.ella.ui.layout.Identifier;
 import org.schorn.ella.ui.layout.Item;
 import org.schorn.ella.ui.layout.Style;
+import org.schorn.ella.ui.layout.Window;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -35,30 +38,33 @@ public class Accounts extends ViewerScene implements Consumer<Map<String, String
         ITEM_STYLE = String.format("%s; %s;", rule1.render(), rule2.render());
     }
 
+    private final List<Window> windows = new ArrayList<>();
+    private final AccountPanel accountPanel = new AccountPanel();
     private final List<Map<String, String>> accounts = new ArrayList<>();
 
-    public Accounts(AppConfig appConfig) {
+    public Accounts(AppConfig appConfig) throws Exception {
         super(appConfig.getItemPropertyValue(String.class, Accounts.class, Item.Properties.ID),
                 appConfig.getItemPropertyValue(String.class, Accounts.class, Item.Properties.NAME),
                 appConfig.getItemPropertyValue(String.class, Accounts.class, Item.Properties.LABEL),
                 appConfig.getItemPropertyValue(Boolean.class, Accounts.class, Item.Properties.VISIBLE)
         );
+        this.windows.add(Window.create(Identifier.create(this.name()), this.label()));
+
     }
 
-    @Override
+    /*
     protected void build0(HTML.Element element) throws Exception {
-        HTML.Div divElement = HTML.Div.create();
-        element.append(divElement);
-        divElement.addClass(this.name());
-        divElement.addClass("section");
-        for (Map<String, String> map : this.accounts) {
-            divElement.append(this.createItem(map));
-        }
     }
+     */
 
     @Override
     public void accept(Map<String, String> map) {
         accounts.add(map);
+    }
+
+    @Override
+    public List<Window> windows() {
+        return Collections.unmodifiableList(this.windows);
     }
 
     /**
@@ -84,42 +90,6 @@ public class Accounts extends ViewerScene implements Consumer<Map<String, String
         public CSS.Selector selector() {
             return this.selector;
         }
-    }
-
-    /*
-    <div id="acct001" class="account_button">
-      <div class="account_description">Checking ...7708</div>
-      <div class="account_value"><span class="subscript">$</span>4,785<span class="subscript">91</span></div>
-      <div class="account_value_label">AVAILABLE BALANCE</div>
-    </div>
-     */
-    private HTML.Element createItem(Map<String, String> map) throws Exception {
-        HTML.Div accountDiv = HTML.Div.create();
-        accountDiv.setId(map.get("account_proxy"));
-        accountDiv.addClass("account_button");
-        HTML.Div accountDesc = HTML.Div.create();
-        accountDiv.append(accountDesc);
-        accountDesc.addClass("account_description");
-        accountDesc.setTextContent(String.format("%s %s",
-                map.get("account_name"),
-                map.get("account_id_hint")));
-        HTML.Div accountValue = HTML.Div.create();
-        accountDiv.append(accountValue);
-        accountValue.addClass("account_value");
-        accountValue.append(HTML.Span.create().addClass("subscript").setTextContent(map.get("account_ccy")));
-        String[] amounts = map.get("account_amount").split("\\.");
-        if (amounts.length > 0) {
-            accountValue.append(HTML.Span.create().setTextContent(amounts[0]));
-        }
-        if (amounts.length == 2) {
-            accountValue.append(HTML.Span.create().addClass("subscript").setTextContent(amounts[1]));
-        }
-        HTML.Div accountValueLabel = HTML.Div.create();
-        accountDiv.append(accountValueLabel);
-        accountValueLabel.addClass("account_value_label");
-        accountValueLabel.setTextContent("AVAILABLE BALANCE");
-
-        return accountDiv;
     }
 
     static List<Map<String, String>> testAccounts() {
